@@ -1,12 +1,12 @@
 // @HEADER
-// ************************************************************************
 //
-//        Phalanx: A Partial Differential Equation Field Evaluation 
-//       Kernel for Flexible Management of Complex Dependency Chains
-//                    Copyright 2008 Sandia Corporation
+// ***********************************************************************
 //
-// Under terms of Contract DE-AC04-94AL85000, there is a non-exclusive
-// license for use of this work by or on behalf of the U.S. Government.
+//        MueLu: A package for multigrid based preconditioning
+//                  Copyright 2012 Sandia Corporation
+//
+// Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,
+// the U.S. Government retains certain rights in this software.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -35,25 +35,34 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// Questions? Contact Roger Pawlowski (rppawlo@sandia.gov), Sandia
-// National Laboratories.
+// Questions? Contact
+//                    Jonathan Hu       (jhu@sandia.gov)
+//                    Andrey Prokopenko (aprokop@sandia.gov)
+//                    Ray Tuminaro      (rstumin@sandia.gov)
 //
-// ************************************************************************
+// ***********************************************************************
+//
 // @HEADER
 
+#ifndef MUELU_USEDEFAULTTYPES_HPP
+#define MUELU_USEDEFAULTTYPES_HPP
 
-#ifndef PHX_TYPE_STRINGS_HPP
-#define PHX_TYPE_STRINGS_HPP
+#include <Kokkos_DefaultNode.hpp>
 
-#include "Teuchos_TypeNameTraits.hpp"
-#include <string>
+namespace MueLu
+{
+  typedef double DefaultScalar;
+  typedef int DefaultLocalOrdinal;
 
-namespace PHX {
+  #ifdef HAVE_MUELU_DEFAULT_GO_LONG
+  typedef long DefaultGlobalOrdinal;
+  #elif HAVE_MUELU_DEFAULT_GO_LONGLONG
+  typedef long long DefaultGlobalOrdinal;
+  #else
+  typedef int DefaultGlobalOrdinal;
+  #endif
 
-  template<typename ObjectT>
-  std::string typeAsString() 
-  { return Teuchos::TypeNameTraits<ObjectT>::name(); }
-
+  typedef KokkosClassic::DefaultNode::DefaultNodeType DefaultNode;
 }
-   
+
 #endif

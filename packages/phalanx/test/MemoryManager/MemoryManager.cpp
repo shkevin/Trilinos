@@ -1,12 +1,12 @@
 // @HEADER
+// ************************************************************************
 //
-// ***********************************************************************
+//        Phalanx: A Partial Differential Equation Field Evaluation
+//       Kernel for Flexible Management of Complex Dependency Chains
+//                    Copyright 2008 Sandia Corporation
 //
-//             Xpetra: A linear algebra interface package
-//                  Copyright 2012 Sandia Corporation
-//
-// Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,
-// the U.S. Government retains certain rights in this software.
+// Under terms of Contract DE-AC04-94AL85000, there is a non-exclusive
+// license for use of this work by or on behalf of the U.S. Government.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -35,40 +35,32 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// Questions? Contact
-//                    Jonathan Hu       (jhu@sandia.gov)
-//                    Andrey Prokopenko (aprokop@sandia.gov)
-//                    Ray Tuminaro      (rstumin@sandia.gov)
+// Questions? Contact Roger Pawlowski (rppawlo@sandia.gov), Sandia
+// National Laboratories.
 //
-// ***********************************************************************
-//
+// ************************************************************************
 // @HEADER
-#ifndef XPETRA_USEDEFAULTTYPES_HPP
-#define XPETRA_USEDEFAULTTYPES_HPP
 
-#include <Kokkos_DefaultNode.hpp> // For Epetra only runs this points to FakeKokkos in Xpetra
-#include "Xpetra_ConfigDefs.hpp"
+#include "Teuchos_Assert.hpp"
+#include "Teuchos_UnitTestHarness.hpp"
+#include "Teuchos_TimeMonitor.hpp"
+#include "Phalanx_KokkosDeviceTypes.hpp"
+#include "Phalanx_FieldTag.hpp"
+#include "Phalanx_MemoryManager.hpp"
 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#include "Sacado.hpp"
+#include "Kokkos_Core.hpp"
+#include "Kokkos_View_Fad.hpp"
+#include "Kokkos_DynRankView.hpp"
+#include "Kokkos_DynRankView_Fad.hpp"
 
-// Define default data types
-typedef double Scalar;
-typedef int LocalOrdinal;
+namespace phalanx_test {
 
-// Choose global ordinal based on enabled underlying libraries
-#ifdef HAVE_XPETRA_TPETRA
-typedef typename Tpetra::Map<>::global_ordinal_type GlobalOrdinal;
-//Have Epetra only; use Epetra's default GlobalOrdinal
-#else
-#ifdef EPETRA_NO_32BIT_GLOBAL_INDICES
-typedef long long GlobalOrdinal;
-#else
-typedef int GlobalOrdinal;
-#endif
-#endif
+  TEUCHOS_UNIT_TEST(Kokkos_AllocationTracker, MemoryManager)
+  {
+    PHX::MemoryManager pool1;
 
-typedef KokkosClassic::DefaultNode::DefaultNodeType Node;
+    auto pool2 = pool1.clone();
+  }
 
-#endif // DOXYGEN_SHOULD_SKIP_THIS
-
-#endif
+}

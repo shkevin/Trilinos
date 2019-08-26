@@ -49,21 +49,22 @@
 
 #include "Xpetra_ConfigDefs.hpp"
 #include "Xpetra_Map.hpp"
-//#include "Xpetra_MapFactory.hpp"
 #include "Xpetra_ImportFactory.hpp"
 //#include "Xpetra_MapUtils.hpp"
+
+#include "Xpetra_MapFactory_decl.hpp"
 
 namespace Xpetra {
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
   // forward declaration of Vector, needed to prevent circular inclusions
-//  template<class S, class LO, class GO, class N> class Vector;
-  template<class LO, class GO, class N> class MapFactory;
+  // template<class S, class LO, class GO, class N> class Vector;
+  // template<class LO, class GO, class N> class MapFactory;
 #endif
 
-  template <class LocalOrdinal = Map<>::local_ordinal_type,
-            class GlobalOrdinal = typename Map<LocalOrdinal>::global_ordinal_type,
-            class Node = typename Map<LocalOrdinal, GlobalOrdinal>::node_type>
+  template <class LocalOrdinal,
+            class GlobalOrdinal,
+            class Node = KokkosClassic::DefaultNode::DefaultNodeType>
   class BlockedMap
     : public Map< LocalOrdinal, GlobalOrdinal, Node >
   {

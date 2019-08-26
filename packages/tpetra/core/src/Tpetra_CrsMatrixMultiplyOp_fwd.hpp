@@ -1,9 +1,8 @@
 // @HEADER
-//
 // ***********************************************************************
 //
-//             Xpetra: A linear algebra interface package
-//                  Copyright 2012 Sandia Corporation
+//          Tpetra: Templated Linear Algebra Services Package
+//                 Copyright (2008) Sandia Corporation
 //
 // Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,
 // the U.S. Government retains certain rights in this software.
@@ -35,28 +34,26 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// Questions? Contact
-//                    Jonathan Hu       (jhu@sandia.gov)
-//                    Andrey Prokopenko (aprokop@sandia.gov)
-//                    Ray Tuminaro      (rstumin@sandia.gov)
-//
-// ***********************************************************************
-//
+// ************************************************************************
 // @HEADER
-#ifndef XPETRA_USEDEFAULTTYPESCOMPLEX_HPP
-#define XPETRA_USEDEFAULTTYPESCOMPLEX_HPP
 
-#include <Kokkos_DefaultNode.hpp> // Note: we should not need this header for Epetra
-#include "Xpetra_ConfigDefs.hpp"
+#ifndef TPETRA_CRSMATRIXMULTIPLYOP_FWD_HPP
+#define TPETRA_CRSMATRIXMULTIPLYOP_FWD_HPP
+
+#include "Tpetra_Details_DefaultTypes.hpp"
+
+/// \file Tpetra_CrsMatrixMultiplyOp_fwd.hpp
+/// \brief Forward declaration of Tpetra::CrsMatrixMultiplyOp
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-
-// Define default data types
-typedef std::complex<double> Scalar;
-typedef int LocalOrdinal;
-typedef int GlobalOrdinal;
-typedef KokkosClassic::DefaultNode::DefaultNodeType Node;
-
+namespace Tpetra {
+template<class Scalar,
+         class MatScalar = Scalar,
+         class LocalOrdinal = ::Tpetra::Details::DefaultTypes::local_ordinal_type,
+         class GlobalOrdinal = ::Tpetra::Details::DefaultTypes::global_ordinal_type,
+         class Node = ::Tpetra::Details::DefaultTypes::node_type>
+class CrsMatrixMultiplyOp;
+} // namespace Tpetra
 #endif // DOXYGEN_SHOULD_SKIP_THIS
 
-#endif
+#endif // TPETRA_CRSMATRIXMULTIPLYOP_FWD_HPP
